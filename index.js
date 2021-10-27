@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
-import App from './src/app.vue'
+import app from './view/app.vue'
 import Bll from './bll/Bll';
 const store = createStore({
   state:()=>{},
@@ -20,6 +20,6 @@ const store = createStore({
 Bll.dispatch=store.dispatch;
 Bll.getState=()=>store.state;
 
-createApp(App)
+createApp(app)
   .use(store)
   .mount('#root');
