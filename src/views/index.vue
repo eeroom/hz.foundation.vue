@@ -14,7 +14,11 @@ export default {
     data(){
       console.log("computed-data",this.$store);
       return this.$store.state[bllAccount.namespace]||{}}
+  },
+  mounted (){
+    bllAccount.setState({count:(this.data.count||0)+112})
   }
+
 
 }
 </script>
