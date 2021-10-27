@@ -1,5 +1,5 @@
 <script>
-import index from './views/index.vue'
+import index from './account/index.vue'
 
 
 export default {
