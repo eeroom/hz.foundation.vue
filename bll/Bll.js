@@ -12,7 +12,6 @@ export default class Bll{
 
 
     setState(data){
-        console.log("data",data)
         this.dispatch({type:"hz",namespace:this.namespace,data});
     }
 }

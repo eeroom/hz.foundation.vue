@@ -1,31 +1,44 @@
 <script>
-import BllAccount from '../../bll/BllAccount'
+import BllAccount from "../../bll/BllAccount";
 
 let bllAccount = new BllAccount();
 export default {
-  props:["mybanji"],//如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
-  methods:{
-    clikcme(){
-      console.log("clikcme",this.$store.state);
-      bllAccount.setState({count:(this.data.count||0)+1})
-    }
+  props: ["mybanji"], //如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
+  methods: {
+    clikcme() {
+      console.log("clikcme", this.$store.state);
+      bllAccount.setState({ count: (this.mystate.count || 0) + 1 });
+    },
+    getNowDate() {
+      return new Date();
+    },
   },
   computed: {
-    data(){
-      console.log("computed-data",this.$store);
-      return this.$store.state[bllAccount.namespace]||{}}
+    mystate() {
+      console.log("mystate,‘第2个’执行", this.$store);
+      return this.$store.state[bllAccount.namespace] || {};
+    },
+    wangp() {
+       console.log("wangp,‘第2个’执行", this.$store);
+      return [1, 23, 4];
+    },
   },
-  mounted (){
-    bllAccount.setState({count:(this.data.count||0)+112})
-  }
-
-
-}
+  mounted() {
+    console.log("mounted,这个方法在组件生命周期内只执行一次，并且'第3个'执行");
+    bllAccount.setState({ count: 112 });
+  },
+  data() {
+    console.log("data，这个方法在组件生命周期内只执行一次，并且'第1个'执行");
+    return {
+      nowDate: this.getNowDate(),
+    };
+  },
+};
 </script>
 
 <template>
-  <p>班级：{{mybanji}}</p>
-  <p class="greeting">{{ data.count||0 }}</p>
+  <p>班级：{{ mybanji }}{{ this.nowDate }}</p>
+  <p class="greeting">{{ mystate.count || 0 }}</p>
   <button v-on:click="clikcme">点我一下</button>
 </template>
 
