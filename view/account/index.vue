@@ -8,6 +8,7 @@ export default {
     clikcme() {
       console.log("clikcme", this.$store.state);
       bllAccount.setState({ count: (this.mystate.count || 0) + 1 });
+      this.myclicktimes=this.myclicktimes+1;
     },
     getNowDate() {
       return new Date();
@@ -31,6 +32,7 @@ export default {
     console.log("data，这个方法在组件生命周期内只执行一次，并且'第1个'执行");
     return {
       nowDate: this.getNowDate(),
+      myclicktimes:0
     };
   },
 };
@@ -38,7 +40,8 @@ export default {
 
 <template>
   <p>班级：{{ mybanji }}{{ this.nowDate }}{{wangp}}</p>
-  <p class="greeting">{{ mystate.count || 0 }}</p>
+  <p class="greeting">mystate:{{ mystate.count || 0 }}</p>
+  <p >data:{{ myclicktimes }}</p>
   <button v-on:click="clikcme">点我一下</button>
 </template>
 
