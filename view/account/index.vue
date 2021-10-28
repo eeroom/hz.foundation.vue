@@ -19,8 +19,8 @@ export default {
       return this.$store.state[bllAccount.namespace] || {};
     },
     wangp() {
-       console.log("wangp,‘第2个’执行", this.$store);
-      return [1, 23, 4];
+      console.log("wangp,‘第2个’执行", this.$store);
+      return new Date()?{a:"1"}:{b:"2"};
     },
   },
   mounted() {
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <template>
-  <p>班级：{{ mybanji }}{{ this.nowDate }}</p>
+  <p>班级：{{ mybanji }}{{ this.nowDate }}{{wangp}}</p>
   <p class="greeting">{{ mystate.count || 0 }}</p>
   <button v-on:click="clikcme">点我一下</button>
 </template>
