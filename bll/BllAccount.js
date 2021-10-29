@@ -2,8 +2,7 @@ import Bll from "./Bll";
 
 export default class BllAccount extends Bll{
     constructor(){
-        super();
-        this.namespace=BllAccount.name;
+        super(BllAccount.name);
     }
 
     add(parameter){
