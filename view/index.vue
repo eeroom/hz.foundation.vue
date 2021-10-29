@@ -41,8 +41,9 @@ export default {
 <template>
   <div>
       <h3>首页</h3>
-      <router-link to="/account/index">我的班班级</router-link>
-      <router-link to="/account/myinfo">我的信息</router-link>
+      <h3><router-link to="/account/index">我的班班级</router-link></h3>
+      <h3><router-link to="/account/myinfo">我的信息</router-link></h3>
+      
       </div>
 </template>
 

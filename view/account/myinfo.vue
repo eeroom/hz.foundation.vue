@@ -39,6 +39,10 @@ export default {
 </script>
 
 <template>
+<h3>  <router-link to="/" style="display:">首页</router-link></h3>
+<h3>  <router-link to="/account/index">我的班班级</router-link></h3>
+    
+    
   <p>myinfo:{{ mybanji }}{{ this.nowDate }}{{wangp}}</p>
   <p class="greeting">mystate:{{ mystate.count || 0 }}</p>
   <p >data:{{ myclicktimes }}</p>
