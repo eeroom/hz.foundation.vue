@@ -1,8 +1,8 @@
 import Bll from "./Bll";
 
 export default class BllAccount extends Bll{
-    constructor(){
-        super(BllAccount.name);
+    constructor(ns){
+        super(ns||BllAccount.name);
     }
 
     add(parameter){
