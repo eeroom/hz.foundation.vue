@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import app from './app.vue'
 import Bll from './bll/Bll';
 import createMyRouter from './router';
-
+import './Bootstrap3.3.7/css/bootstrap.css'
 const store = createStore({
   state:()=>{},
   mutations:{

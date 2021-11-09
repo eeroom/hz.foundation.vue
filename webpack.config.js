@@ -28,7 +28,7 @@ module.exports = {
             ,{test: /\.vue$/,use: ['vue-loader']}
             , {test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ }
             ,{test: /\.scss$/,use: ["style-loader","css-loader","sass-loader"]},
-            {test: /\.(png|svg|jpg|gif)$/,use: ['file-loader']}
+            {test: /\.(png|svg|jpg|gif|ttf|woff2|eot|woff)$/,use: ['file-loader']}
         ]
     }
     ,plugins:[new VueLoaderPlugin()]
