@@ -128,7 +128,7 @@ export default {
                 <span class="glyphicon glyphicon-chevron-down"></span>
               </span>
             </a>
-             <a style="cour" v-if="item.children && item.children.length>0">
+             <a style="cursor:pointer" v-if="item.children && item.children.length>0">
               <span>{{ item.text }}</span>
               <span
                 class="pull-right"
