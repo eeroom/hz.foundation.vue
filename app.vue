@@ -1,47 +1,51 @@
 <script>
 export default {
   methods: {
-    onselectmenu(menu) {
-      console.log("menu", menu);
-      this.lstmenu.filter((x) => x != menu).forEach((x) => (x.zhankai = false));
-      menu.zhankai = !menu.zhankai;
-      return false;
-    },
-    onselectsubmenu(selectedsub,lstsub) {
-        lstsub.forEach(x=>x.selected=false);
-        selectedsub.selected = true;
-        return false;
-    },
+
   },
   data() {
     return {
+      selectedmenu:{},
       lstmenu: [
         {
+          opened:false,
           text: "伊利丹",
-          url: "/home/yilidan",
-          selected: false,
-          zhankai: false,
+          url: "/"
         },
         {
+          opened:false,
           text: "卡拉赞",
-          url: "/home/yilidan",
-          selected: false,
-          zhankai: false,
+          url: "",
           children: [
             {
+                opened:false,
               text: "午夜",
-              url: "/home/yilidan",
-              selected: false,
-              zhankai: false,
+              url: "/account/index"
             },
             {
+                opened:false,
               text: "埃兰",
-              url: "/home/yilidan",
-              selected: false,
-              zhankai: false,
+              url: "/account/myinfo"
             },
           ],
         },
+        {
+            opened:false,
+          text: "卡拉赞2",
+          url: "",
+          children: [
+            {
+                opened:false,
+              text: "午夜2",
+              url: "/account/index"
+            },
+            {
+                opened:false,
+              text: "埃兰2",
+              url: "/account/myinfo"
+            },
+          ],
+        }
       ],
     };
   },
@@ -90,37 +94,31 @@ export default {
           v-bind:key="index"
           class="nav nav-sidebar"
         >
-          <li :class="item.selected ? 'active' : ''">
+          <li :class="item==selectedmenu ? 'active' : ''">
+            <router-link  v-if="!item.children || item.children.length < 0"
+             :to="item.url" @click="selectedmenu=item"><span>{{ item.text }}</span></router-link>
             <a
-              :href="item.url"
-              v-if="!item.children || item.children.length < 1"
-            >
-              <span>{{ item.text }}</span>
-            </a>
-            <a
-              style="cursor: pointer"
               v-if="item.children && item.children.length > 0"
-              @click="onselectmenu(item)"
+              style="cursor: pointer"
+              @click="item.opened=!item.opened"
             >
               <span>{{ item.text }}</span>
-              <span class="pull-right" v-if="!item.zhankai">
+              <span class="pull-right" v-if="!item.opened">
                 <span class="glyphicon glyphicon-chevron-right"></span>
               </span>
-              <span class="pull-right" v-if="item.zhankai">
+              <span class="pull-right" v-if="item.opened">
                 <span class="glyphicon glyphicon-chevron-down"></span>
               </span>
             </a>
           </li>
-          <li v-if="item.children && item.children.length > 0 && item.zhankai">
-            <ul class="nav on nav-sub">
+          <li>
+            <ul :class="item.opened?'nav on nav-sub':'nav collapse nav-sub'">
               <li
-                :class="subitem.selected ? 'active a-active' : 'a-noactive'"
+                :class="subitem==selectedmenu ? 'active a-active' : 'a-noactive'"
                 v-for="(subitem, index) in item.children"
                 v-bind:key="index"
               >
-                <a  style="cursor: pointer"  @click="onselectsubmenu(subitem,item.children)"
-                  ><span>{{ subitem.text }}</span></a
-                >
+               <router-link :to="subitem.url" @click="selectedmenu=subitem"><span>{{ subitem.text }}</span></router-link>
               </li>
             </ul>
           </li>
@@ -258,10 +256,12 @@ body {
    color: #fff !important;
   background-color: #428bca !important;
   border-right: 4px red solid;
+  transition: 0.1s;
 }
 .a-noactive>a:hover,.a-noactive>a:focus{
    color: rgb(8, 8, 8) !important;
    border-right: 4px red solid;
+   transition: 0.1s;
 }
 .navbar-nav > li > a:hover {
   border-bottom: 2px solid #ff0000;
