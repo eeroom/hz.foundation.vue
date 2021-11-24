@@ -70,8 +70,26 @@ export default {
   {{ rootdata.docTitle }}
   <div>1111111111111111</div>
   <vform ref="vvf">
-    <vinput v-model="formdata.mani.seek" v-if="showform"></vinput>
-    <vinput v-model="formdata.mani.seek22"></vinput>
+     <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <vinput type="text" class="form-control" v-model="formdata.mani.seek" v-if="showform" />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <vinput type="password" class="form-control" v-model="formdata.mani.seek22" />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" id="exampleInputFile" />
+        <p class="help-block">Example block-level help text here.</p>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" /> Check me out
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">确定</button>
+  
   </vform>
   <input type="button" value="切换一下" @click="showform = !showform" />
 </template>
@@ -80,5 +98,8 @@ export default {
 .greeting {
   color: red;
   font-weight: bold;
+}
+.form-group{
+  position: relative;
 }
 </style>

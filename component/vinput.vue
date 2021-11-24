@@ -1,11 +1,16 @@
 <template>
-  <input type="text" @input="inputHandler" :value="modelValue" />
-  <span v-if="vfault" style="color: red">{{ vmsg }}</span>
+  <input
+    type="text"
+    @input="inputHandler"
+    :value="modelValue"
+    :class="myclass"
+  />
+  <div v-if="vfault" class="v-tips">{{ vmsg }}</div>
 </template>
 <script>
 import { ref, inject, onMounted, onUnmounted } from "vue";
 export default {
-  props: ["modelValue", "validate"],
+  props: ["modelValue", "validate", "class"],
   emits: ["update:modelValue"],
   setup(props, { emit, slots, attrs }) {
     let lstValidat = inject("lstValidat");
@@ -15,6 +20,7 @@ export default {
       emit("update:modelValue", x.target.value);
       validataf(x.target.value);
     };
+    let myclass = props.class;
     let validataf = (x) => {
       if (!x) {
         vmsg.value = "不能为空";
@@ -44,7 +50,22 @@ export default {
       inputHandler,
       vfault,
       vmsg,
+      myclass,
     };
   },
 };
 </script>
+<style>
+.form-control {
+  width: 240px;
+}
+
+.v-tips {
+  color: red;
+}
+
+.v-tips::after{
+  content: '校验失败';
+  color: red;
+}
+</style>
