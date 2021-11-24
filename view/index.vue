@@ -1,25 +1,38 @@
 <script>
 import BllAccount from "../bll/BllAccount";
 import { useStore } from "vuex";
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted,reactive } from "vue";
+import vinput from '../component/vinput.vue'
+import vform from '../component/vform.vue'
 let bllAccount = new BllAccount();
 export default {
+  components: { vinput,vform },
   props: ["mybanji"], //如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
   setup(props) {
+    let vvf=ref(null)
     let store = useStore();
     let mystate = computed(() => store.state[bllAccount.namespace] || {});
     let myclicktimes = ref(0);
+    let formdata=reactive({mani:{}});
+    let rootdata=reactive({});
     let clikcme = () => {
       bllAccount.setState({ count: (mystate.value.count || 0) + 1 });
       myclicktimes.value += 1;
+      console.log("formdata",JSON.stringify(formdata));
+      vvf.value.validata(function(){
+          console.log(arguments);
+      });
     };
     let wangp = computed(() => (new Date() ? { a: "1" } : { b: "2" }));
     let nowDate = new Date();
+    let showform=ref(true);
     onMounted(() => {
       setTimeout(() => {
         //bllAccount.setState({ count: 112 });
+        rootdata.docTitle="helco dddddddddddddddddddddddddd"
       }, 3000);
     });
+    
     return {
       mystate,
       myclicktimes,
@@ -27,6 +40,10 @@ export default {
       nowDate,
       clikcme,
       bllAccount,
+      formdata,
+      rootdata,
+      vvf,
+      showform
     };
   },
 };
@@ -47,6 +64,15 @@ export default {
   <p class="greeting">mystate:{{ mystate.count || 0 }}</p>
   <p>data:{{ myclicktimes }}</p>
   <button v-on:click="clikcme">点我一下</button>
+  <input type="text" v-model="formdata.mani.seek">
+  <span ref="vme"></span>
+  {{formdata.mani.seek}}
+  {{rootdata.docTitle}}
+  <div>1111111111111111</div>
+  <vform ref="vvf">
+    <vinput v-model="formdata.mani.seek" v-if="showform"></vinput>
+    </vform>
+  <input type="button" value="切换一下" @click="showform=!showform">
 </template>
 
 <style>
