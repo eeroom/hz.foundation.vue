@@ -1,46 +1,29 @@
 <script>
-import BllAccount from "../../bll/BllAccount";
-import { useStore } from "vuex";
-import { computed, ref, onMounted } from "vue";
-let bllAccount = new BllAccount();
+import { computed, ref, onMounted,reactive } from "vue";
+import mybizform from "../../component/mybizform.vue";
 export default {
-  props: ["mybanji"], //如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
-   setup(props) {
-    let store = useStore();
-    let mystate = computed(() => store.state[bllAccount.namespace] || {});
-    let myclicktimes = ref(0);
-    let clikcme = () => {
-      bllAccount.setState({ count: (mystate.value.count || 0) + 1 });
-      myclicktimes.value += 1;
-    };
-    let wangp = computed(() => (new Date() ? { a: "1" } : { b: "2" }));
-    let nowDate = new Date();
-    onMounted(() => {
+  components: {
+    mybizform,
+  },
+  setup() {
+    let formdata=ref({});
+    onMounted(()=>{
       setTimeout(() => {
-        //bllAccount.setState({ count: 112 });
-      }, 3000);
-    });
+        console.log("setTimeout")
+        formdata.value={name:"张三",address:"中国"};
+      }, 1000);
+    })
     return {
-      mystate,
-      myclicktimes,
-      wangp,
-      nowDate,
-      clikcme,
-      bllAccount,
+      formdata
     };
   },
 };
 </script>
 
 <template>
-<h3>  <router-link to="/" style="display:">首页</router-link></h3>
-<h3>  <router-link to="/account/index">store-demo</router-link></h3>
-    
-    
-  <p>myinfo:{{ mybanji }}{{ this.nowDate }}{{wangp}}</p>
-  <p class="greeting">mystate:{{ mystate.count || 0 }}</p>
-  <p >data:{{ myclicktimes }}</p>
-  <button v-on:click="clikcme">点我一下</button>
+  <h3><router-link to="/" style="display: ">首页</router-link></h3>
+  <h3><router-link to="/account/index">store-demo</router-link></h3>
+  <mybizform :formdata="formdata"></mybizform>
 </template>
 
 <style>
