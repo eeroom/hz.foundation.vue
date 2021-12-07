@@ -34,7 +34,7 @@ export default {
 
 <template>
 <h3>  <router-link to="/" style="display:">首页</router-link></h3>
-<h3>  <router-link to="/account/index">我的班班级</router-link></h3>
+<h3>  <router-link to="/account/index">store-demo</router-link></h3>
     
     
   <p>myinfo:{{ mybanji }}{{ this.nowDate }}{{wangp}}</p>

@@ -26,8 +26,8 @@ export default {
 </script>
 
 <template>
-  <h3><router-link to="/">首页22</router-link></h3>
-  <h3><router-link to="/account/myinfo">我的信息</router-link></h3>
+  <h3><router-link to="/account/index">store-demo</router-link></h3>
+  <h3><router-link to="/account/edit">表单-编辑</router-link></h3>
 
   <vform ref="vvf">
     <div class="form-group">
@@ -50,9 +50,9 @@ export default {
     <div class="checkbox">
       <label> <input type="checkbox" /> Check me out </label>
     </div>
-    <div class="form-group"> <button  class="btn btn-primary" v-on:click="setformdata">设置一个新的formdata值</button></div>
+    <div class="form-group"> <button type="button"  class="btn btn-primary" v-on:click="setformdata">设置一个新的formdata值</button></div>
 
-    <div class="form-group"><button  class="btn btn-primary" v-on:click="submitform">校验并提交</button></div>
+    <div class="form-group"><button  type="button"  class="btn btn-primary" v-on:click="submitform">校验并提交</button></div>
     
    
   </vform>
