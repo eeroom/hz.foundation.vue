@@ -4,11 +4,13 @@ import { useStore } from "vuex";
 import { computed, ref, onMounted, reactive } from "vue";
 import vinput from "../component/vinput.vue";
 import vform from "../component/vform.vue";
+import validate from '../component/validate.vue'
+import Validate from '../component/validate.vue';
 let bllAccount = new BllAccount();
 export default {
-  components: { vinput, vform },
+  components: { vinput, vform, Validate },
   props: ["mybanji"], //如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
-  setup(props) {
+  setup(props,{attrs,slots,emit}) {
     let vvf = ref(null);
     let store = useStore();
     let mystate = computed(() => store.state[bllAccount.namespace] || {});
@@ -92,6 +94,9 @@ export default {
   
   </vform>
   <input type="button" value="切换一下" @click="showform = !showform" />
+  <validate>
+     <input type="text" v-model="formdata.mani.seek" />
+  </validate>
 </template>
 
 <style>
