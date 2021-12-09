@@ -88,7 +88,7 @@ export default {
 
   <div class="container-fluid">
     <div class="row">
-      <div class="sidebar col-md-3">
+      <div class="sidebar col-xs-3">
         <ul
           v-for="(item, index) in lstmenu"
           v-bind:key="index"
@@ -124,7 +124,7 @@ export default {
           </li>
         </ul>
       </div>
-      <div class="col-md-21 col-md-offset-3 main">
+      <div class="col-xs-21 col-xs-offset-3 main">
         <router-view></router-view>
       </div>
     </div>
