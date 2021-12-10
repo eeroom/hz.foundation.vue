@@ -94,8 +94,8 @@ export default {
           v-bind:key="index"
           class="nav nav-sidebar"
         >
-          <li :class="item==selectedmenu ? 'active' : ''">
-            <router-link  v-if="!item.children || item.children.length < 0"
+          <li :class="(item==selectedmenu ? 'active ' : ' ') + (!item.children || item.children.length < 0?'menu-l1':'')">
+            <router-link  v-if="!item.children || item.children.length < 0" 
              :to="item.url" @click="selectedmenu=item"><span>{{ item.text }}</span></router-link>
             <a
               v-if="item.children && item.children.length > 0"
@@ -114,7 +114,7 @@ export default {
           <li>
             <ul :class="item.opened?'nav on nav-sub':'nav collapse nav-sub'">
               <li
-                :class="subitem==selectedmenu ? 'active a-active' : 'a-noactive'"
+                :class="subitem==selectedmenu ? 'active' : ''"
                 v-for="(subitem, index) in item.children"
                 v-bind:key="index"
               >
@@ -138,9 +138,15 @@ export default {
 </template>
 
 <style>
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
 }
+
 
 /*
  * Global add-ons
@@ -157,6 +163,24 @@ body {
  */
 .navbar-fixed-top {
   border: 0;
+}
+
+.active > a {
+  color: #fff;
+  background-color: #428bca;
+}
+
+.navbar-nav > li > a:hover {
+  border-bottom: 2px solid #ff0000;
+}
+.navbar-nav > .active > a {
+  border-bottom: 2px solid #ff0000;
+}
+
+.navbar-toggle{
+float: none;
+position: absolute;
+right: 0;
 }
 
 /*
@@ -184,20 +208,48 @@ body {
 }
 
 /* Sidebar navigation */
-.nav-sidebar {
+
+.sidebar .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
   margin-left: -20px;
 }
-.nav-sidebar > li > a {
+.sidebar .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  font-weight: 700;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+.sidebar .nav-sidebar .nav-sub > li > a > span {
+  padding-left: 15px;
+}
+
+.sidebar .active > a {
   color: #fff;
   background-color: #428bca;
+}
+
+.sidebar .nav-sub> li > a:hover,
+.nav > .menu-l1 > a:hover{
+  color: rgb(8, 8, 8) ;
+  background-color: #b5b5b6;
+  transition: 0.2s;
+}
+
+.sidebar .nav-sub> .active > a:hover,.sidebar .nav-sub> .active > a:focus,
+.nav > .active > a:hover,.nav > .active > a:focus{
+  color: #fff;
+  background-color: #428bca;
+}
+
+.sidebar .nav-sub> li > a:hover::after,
+.nav > .menu-l1 > a:hover::after{
+  content: '';
+  position:absolute;
+  top: 12px;
+  right: -8px;
+  width: 15px;
+  height: 15px;
+  background-color: rgb(24, 23, 23);
+  transform: rotate(45deg);
 }
 
 /*
@@ -217,6 +269,7 @@ body {
   margin-top: 0;
 }
 
+
 /*
  * Placeholder dashboard ideas
  */
@@ -234,39 +287,5 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
-}
-.nav-sidebar {
-  margin-bottom: 0;
-}
-.nav-sidebar > li > a {
-  font-weight: 700;
-}
-.nav-sub > li > a > span {
-  padding-left: 15px;
-}
-.nav-sub > li > a:hover {
-  color: #fff;
-  background-color: #428bca;
-}
-.active > a {
-  color: #fff;
-  background-color: #428bca;
-}
-.a-active>a:hover,.a-active>a:focus{
-   color: #fff !important;
-  background-color: #428bca !important;
-  border-right: 4px red solid;
-  transition: 0.1s;
-}
-.a-noactive>a:hover,.a-noactive>a:focus{
-   color: rgb(8, 8, 8) !important;
-   border-right: 4px red solid;
-   transition: 0.1s;
-}
-.navbar-nav > li > a:hover {
-  border-bottom: 2px solid #ff0000;
-}
-.navbar-nav > .active > a {
-  border-bottom: 2px solid #ff0000;
 }
 </style>
