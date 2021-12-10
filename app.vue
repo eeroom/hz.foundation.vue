@@ -1,57 +1,3 @@
-<script>
-export default {
-  methods: {
-
-  },
-  data() {
-    return {
-      selectedmenu:{},
-      lstmenu: [
-        {
-          opened:false,
-          text: "伊利丹",
-          url: "/"
-        },
-        {
-          opened:false,
-          text: "卡拉赞",
-          url: "",
-          children: [
-            {
-                opened:false,
-              text: "午夜",
-              url: "/account/index"
-            },
-            {
-                opened:false,
-              text: "埃兰",
-              url: "/account/myinfo"
-            },
-          ],
-        },
-        {
-            opened:false,
-          text: "卡拉赞2",
-          url: "",
-          children: [
-            {
-                opened:false,
-              text: "午夜2",
-              url: "/account/index"
-            },
-            {
-                opened:false,
-              text: "埃兰2",
-              url: "/account/myinfo"
-            },
-          ],
-        }
-      ],
-    };
-  },
-};
-</script>
-
 <template>
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -94,13 +40,22 @@ export default {
           v-bind:key="index"
           class="nav nav-sidebar"
         >
-          <li :class="(item==selectedmenu ? 'active ' : ' ') + (!item.children || item.children.length < 0?'menu-l1':'')">
-            <router-link  v-if="!item.children || item.children.length < 0" 
-             :to="item.url" @click="selectedmenu=item"><span>{{ item.text }}</span></router-link>
+          <li
+            :class="
+              (item.id == selectedmenu.id ? 'active ' : ' ') +
+              (!item.children || item.children.length < 0 ? 'menu-l1' : '')
+            "
+          >
+            <router-link
+              v-if="!item.children || item.children.length < 0"
+              :to="item.url"
+              @click="selectedmenu = item"
+              ><span>{{ item.text }}</span></router-link
+            >
             <a
               v-if="item.children && item.children.length > 0"
               style="cursor: pointer"
-              @click="item.opened=!item.opened"
+              @click="item.opened = !item.opened"
             >
               <span>{{ item.text }}</span>
               <span class="pull-right" v-if="!item.opened">
@@ -112,13 +67,17 @@ export default {
             </a>
           </li>
           <li>
-            <ul :class="item.opened?'nav on nav-sub':'nav collapse nav-sub'">
+            <ul
+              :class="item.opened ? 'nav on nav-sub' : 'nav collapse nav-sub'"
+            >
               <li
-                :class="subitem==selectedmenu ? 'active' : ''"
+                :class="subitem.id == selectedmenu.id ? 'active' : ''"
                 v-for="(subitem, index) in item.children"
                 v-bind:key="index"
               >
-               <router-link :to="subitem.url" @click="selectedmenu=subitem"><span>{{ subitem.text }}</span></router-link>
+                <router-link :to="subitem.url" @click="selectedmenu = subitem"
+                  ><span>{{ subitem.text }}</span></router-link
+                >
               </li>
             </ul>
           </li>
@@ -137,6 +96,69 @@ export default {
   </div>
 </template>
 
+<script>
+import { ref } from "vue";
+export default {
+  setup() {
+    let lstmenu = ref([
+      {
+        id: 1,
+        opened: false,
+        text: "伊利丹",
+        url: "/",
+      },
+      {
+        id: 2,
+        opened: false,
+        text: "卡拉赞",
+        url: "",
+        children: [
+          {
+            id: 3,
+            opened: false,
+            text: "午夜",
+            url: "/account/index",
+          },
+          {
+            id: 4,
+            opened: false,
+            text: "埃兰",
+            url: "/account/myinfo",
+          },
+        ],
+      },
+      {
+        id: 5,
+        opened: false,
+        text: "卡拉赞2",
+        url: "",
+        children: [
+          {
+            id: 6,
+            opened: false,
+            text: "午夜2",
+            url: "/account/index",
+          },
+          {
+            id: 7,
+            opened: false,
+            text: "埃兰2",
+            url: "/account/myinfo",
+          },
+        ],
+      },
+    ]);
+    let selectedmenu = ref({});
+    selectedmenu.value = lstmenu.value[0];
+    return {
+      lstmenu,
+      selectedmenu,
+    };
+  },
+};
+</script>
+
+
 <style>
 /*
  * Base structure
@@ -146,7 +168,6 @@ export default {
 body {
   padding-top: 50px;
 }
-
 
 /*
  * Global add-ons
@@ -177,10 +198,10 @@ body {
   border-bottom: 2px solid #ff0000;
 }
 
-.navbar-toggle{
-float: none;
-position: absolute;
-right: 0;
+.navbar-toggle {
+  float: none;
+  position: absolute;
+  right: 0;
 }
 
 /*
@@ -227,28 +248,30 @@ right: 0;
   background-color: #428bca;
 }
 
-.sidebar .nav-sub> li > a:hover,
-.nav > .menu-l1 > a:hover{
-  color: rgb(8, 8, 8) ;
+.sidebar .nav-sub > li > a:hover,
+.nav > .menu-l1 > a:hover {
+  color: rgb(8, 8, 8);
   background-color: #b5b5b6;
   transition: 0.2s;
 }
 
-.sidebar .nav-sub> .active > a:hover,.sidebar .nav-sub> .active > a:focus,
-.nav > .active > a:hover,.nav > .active > a:focus{
+.sidebar .nav-sub > .active > a:hover,
+.sidebar .nav-sub > .active > a:focus,
+.nav > .active > a:hover,
+.nav > .active > a:focus {
   color: #fff;
   background-color: #428bca;
 }
 
-.sidebar .nav-sub> li > a:hover::after,
-.nav > .menu-l1 > a:hover::after{
-  content: '';
-  position:absolute;
+.sidebar .nav-sub > li > a:hover::after,
+.nav > .menu-l1 > a:hover::after {
+  content: "";
+  position: absolute;
   top: 12px;
   right: -8px;
   width: 15px;
   height: 15px;
-  background-color: rgb(24, 23, 23);
+  background-color: rgb(87, 85, 85);
   transform: rotate(45deg);
 }
 
@@ -268,7 +291,6 @@ right: 0;
 .main .page-header {
   margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
