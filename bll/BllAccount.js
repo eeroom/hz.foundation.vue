@@ -13,6 +13,7 @@ export default class BllAccount extends Bll {
     getInfo() {
         this.axios.get("http://www.baidu.com").then(x => {
             /**
+             * 统一处理axios回调函数中的异常
              * 最大痛点：大量业务方法调用api后需要对数据做前置校验，如果校验不通过，后续的处理就2点，1提示用户，2停止后面代码执行，
              * 那么最佳办法就是抛一个异常，
              * 但是promise的机制里面，then里面抛的异常只能由其后面catch进行处理
