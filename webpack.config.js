@@ -3,8 +3,8 @@ const { VueLoaderPlugin } = require('vue-loader');
 module.exports = {
     //mode: "production",
     mode: "development"
-    ,entry: './index.js'
-    ,output: {
+    , entry: './index.js'
+    , output: {
         filename: 'bundle.js'
         , path: path.resolve(__dirname, 'dist')
     }
@@ -24,12 +24,13 @@ module.exports = {
     }
     , module: {
         rules: [
-            {test: /\.css$/,use: ['style-loader','css-loader']}
-            ,{test: /\.vue$/,use: ['vue-loader']}
-            , {test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ }
-            ,{test: /\.scss$/,use: ["style-loader","css-loader","sass-loader"]},
-            {test: /\.(png|svg|jpg|gif|ttf|woff2|eot|woff)$/,use: ['file-loader']}
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            { test: /\.vue$/, use: ['vue-loader'] },
+            { test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ },
+            { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] },
+            { test: /\.mjs$/,include:/node_modules/, type:'javascript/auto' },
+            { test: /\.(png|svg|jpg|gif|ttf|woff2|eot|woff)$/, use: ['file-loader'] }
         ]
     }
-    ,plugins:[new VueLoaderPlugin()]
+    , plugins: [new VueLoaderPlugin()]
 }
