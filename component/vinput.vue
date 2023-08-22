@@ -1,6 +1,6 @@
 <template>
   <input
-    type="text"
+    :type=type
     @input="inputHandler"
     :value="modelValue"
     :class="myclass"
@@ -10,7 +10,7 @@
 <script>
 import { ref, inject, onMounted, onUnmounted } from "vue";
 export default {
-  props: ["modelValue", "validate", "class"],
+  props: ["modelValue", "validate", "class",'type'],
   emits: ["update:modelValue"],
   setup(props, { emit, slots, attrs }) {
     let lstValidat = inject("lstValidat");
