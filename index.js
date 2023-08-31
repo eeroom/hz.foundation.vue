@@ -4,6 +4,7 @@ import app from './app.vue'
 import Bll from './bll/Bll';
 import createMyRouter from './router';
 import './Bootstrap3.3.7/css/bootstrap.css'
+import {my,seek} from './useMystore'
 const store = createStore({
   state:()=>{},
   mutations:{
@@ -21,7 +22,7 @@ const store = createStore({
 });
 Bll.dispatch=store.dispatch;
 Bll.getState=()=>store.state;
-
+seek()
 let myapp= createApp(app);
 myapp.use(store);
 let router=createMyRouter(myapp);

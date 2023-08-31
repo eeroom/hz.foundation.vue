@@ -3,6 +3,7 @@ import BllAccount from "../../bll/BllAccount";
 import { useStore } from "vuex";
 import { computed, ref, onMounted } from "vue";
 let bllAccount = new BllAccount();
+import {my,seek} from './useMystore'
 export default {
   props: ["mybanji"], //如果要自定义属性，必须这里声明，否则引用方传值不报错，但组件内取不到值
    setup(props) {
