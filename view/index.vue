@@ -1,30 +1,3 @@
-<script>
-import { ref, reactive } from "vue";
-import vinput from "../component/vinput.vue";
-import vform from "../component/vform.vue";
-export default {
-  components: { vinput, vform },
-  setup() {
-    let vvf = ref(null);
-    let formdata = ref({});
-    let submitform = () => {
-      vvf.value.validata(function() {
-        alert(JSON.stringify(formdata.value));
-      });
-    };
-    let setformdata = () => {
-      formdata.value = { seek: "we", seek22: "123456" };
-    };
-    return {
-      submitform,
-      setformdata,
-      formdata,
-      vvf
-    };
-  }
-};
-</script>
-
 <template>
   <h3>
     <router-link to="/account/index">store-demo</router-link>
@@ -61,6 +34,25 @@ export default {
     </div>
   </vform>
 </template>
+
+<script setup>
+import { ref, reactive } from "vue";
+import vinput from "../component/vinput.vue";
+import vform from "../component/vform.vue";
+
+let vvf = ref(null);
+let formdata = ref({});
+let submitform = () => {
+  vvf.value.validata(function() {
+    alert(JSON.stringify(formdata.value));
+  });
+};
+let setformdata = () => {
+  formdata.value = { seek: "we", seek22: "123456" };
+};
+</script>
+
+
 
 <style>
 .greeting {

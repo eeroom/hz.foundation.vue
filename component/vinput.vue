@@ -10,6 +10,7 @@
 <script setup>
 import { ref, inject, onMounted, onUnmounted } from "vue";
 let props=defineProps( ["modelValue", "validate", "class",'type'])
+
 let emit=defineEmits( ["update:modelValue"])
 
 let lstValidat = inject("lstValidat");
