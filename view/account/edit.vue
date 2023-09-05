@@ -1,23 +1,15 @@
-<script>
+<script setup>
 import { computed, ref, onMounted,reactive } from "vue";
 import mybizform from "../../component/mybizform.vue";
-export default {
-  components: {
-    mybizform,
-  },
-  setup() {
-    let formdata=ref({});
-    onMounted(()=>{
-      setTimeout(() => {
-        console.log("setTimeout")
-        formdata.value={name:"张三",address:"中国"};
-      }, 1000);
-    })
-    return {
-      formdata
-    };
-  },
-};
+import {init4Edit} from '../../bll/useFormData'
+
+let formdata=init4Edit()
+onMounted(()=>{
+  setTimeout(() => {
+    console.log("setTimeout")
+    formdata.value={name:"张三",address:"中国"};
+  }, 1000);
+})
 </script>
 
 <template>
