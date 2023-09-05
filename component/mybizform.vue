@@ -15,20 +15,11 @@
     </div>
   </form>
 </template>
-<script>
+<script setup>
 import { toRefs } from "vue";
-export default {
-  props: ["formdata"],
-  setup(props) {
-    let { formdata } = toRefs(props);
-    //let formdata=props.formdata;
-    let submitform=()=>{
-        alert(JSON.stringify(formdata.value))
-    }
-    return {
-      formdata,
-      submitform
-    };
-  },
-};
+import {formdata} from '../bll/useFormData'
+defineProps(['formdata'])
+let submitform=()=>{
+    alert(JSON.stringify(formdata.value))
+}
 </script>

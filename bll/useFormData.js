@@ -1,21 +1,21 @@
 import { computed, ref, onMounted,reactive } from "vue";
 
-let formData=ref({})
+let formdata=ref({})
 
 function init4View() {
-    formData.value={
+    formdata.value={
         name:'小Y',
         address:'雷霆崖'
     }
-    return formData
+    return formdata
 }
 
 function init4Edit() {
-    formData.value={
+    formdata.value={
         name:'',
         address:null
     }
-    return formData
+    return formdata
 }
 
-export {formData,init4Edit,init4View}
+export {formdata,init4Edit,init4View}
